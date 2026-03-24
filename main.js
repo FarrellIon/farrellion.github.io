@@ -1,6 +1,7 @@
 export const projects = [
     {
         name: "Ngaturin",
+        image: "./ngaturin.png",
         description: "A personal finance tracking app that helps users monitor spending, track income, and build better financial habits. Sophisticated dashboard with real-time data.",
         tech: ["Next.js", "Prisma", "Chart.js", "Tailwind"],
         link: "https://ngaturin.com",
@@ -51,25 +52,26 @@ export function createProjectCard(project) {
     const techBadges = project.tech.map(t => `<span class="px-2 py-1 text-[10px] uppercase tracking-wider font-mono bg-white/5 border border-white/10 rounded-md text-slate-400">${t}</span>`).join('');
     
     return `
-        <div class="glass-card rounded-2xl p-8 flex flex-col h-full group relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.color} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-            
-            <div class="mb-6 flex justify-between items-start">
-                <div class="w-12 h-12 rounded-xl bg-blue-600/10 border border-blue-500/20 flex items-center justify-center">
-                    <i data-lucide="folder" class="w-6 h-6 text-blue-500"></i>
-                </div>
-                <a href="${project.link}" target="_blank" class="text-slate-500 hover:text-white transition-colors">
-                    <i data-lucide="external-link" class="w-5 h-5"></i>
-                </a>
+        <div class="glass-card rounded-2xl overflow-hidden flex flex-col h-full group relative">
+            <div class="relative overflow-hidden h-48">
+                <img src="${project.image}" alt="${project.name}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"/>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
             </div>
-            
-            <h3 class="text-2xl font-bold text-white mb-3">${project.name}</h3>
-            <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
-                ${project.description}
-            </p>
-            
-            <div class="flex flex-wrap gap-2 pt-6 border-t border-white/5">
-                ${techBadges}
+
+            <div class="p-8 flex flex-col flex-grow relative">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${project.color} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                
+                <h3 class="text-2xl font-bold text-white mb-3">${project.name}</h3>
+                <p class="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">${project.description}</p>
+                
+                <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div class="flex flex-wrap gap-2">
+                        ${techBadges}
+                    </div>
+                    <a href="${project.link}" target="_blank" class="text-slate-500 hover:text-white transition-colors ml-4 shrink-0">
+                        <i data-lucide="external-link" class="w-5 h-5"></i>
+                    </a>
+                </div>
             </div>
         </div>
     `;
